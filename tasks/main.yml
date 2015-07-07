@@ -1,9 +1,9 @@
 - name: make pgpass file
   copy: content="*:5432:testing:testing:testing" dest="{{homedir}}/.pgpass" mode=0600
 
-- name: copy setup.sql.gz across
-  copy: src=setup.sql.gz dest="{{homedir}}/setup.sql.gz"
+- name: copy setup.sql.xz across
+  copy: src=setup.sql.xz dest="{{homedir}}/setup.sql.xz"
 
 - name: uncompress setup.sql
-  shell: chdir="{{homedir}}" creates=setup.sql gunzip -c setup.sql.gz > setup.sql
+  shell: chdir="{{homedir}}" creates=setup.sql unxz -c setup.sql.xz > setup.sql
   notify: install data
